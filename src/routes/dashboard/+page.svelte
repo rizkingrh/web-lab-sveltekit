@@ -1,23 +1,52 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button';
-	import type { PageData } from './$types';
+	import AppSidebar from '$lib/components/sidebar/app-sidebar.svelte';
+	import * as Breadcrumb from '$lib/components/ui/breadcrumb';
+	import { Separator } from '$lib/components/ui/separator';
+	import * as Sidebar from '$lib/components/ui/sidebar';
+
+    import type { PageData } from './$types';
 
 	export let data: PageData;
 
-	// Data sekarang lebih terstruktur
-	const user = data.user;
+    const user = data.user;
 	const profile = data.profile;
+
+    const userData = {
+        nim: profile?.nim,
+        email: user?.email,
+        role: (profile?.roles as any)?.name
+    }
 </script>
 
-<div class="m-5 p-4 border rounded-lg shadow-sm">
-	<h1 class="text-2xl font-bold mb-4">Dashboard</h1>
-	<div class="space-y-2">
-		<p><strong>NIM:</strong> {profile?.nim || 'Tidak tersedia'}</p>
-		<p><strong>Email:</strong> {user?.email || 'Tidak tersedia'}</p>
-		<p><strong>Role:</strong> {profile?.roles?.name || 'Tidak tersedia'}</p>
-	</div>
-
-	<form action="/auth/logout" method="POST">
-		<Button type="submit" class="mt-6">Logout</Button>
-	</form>
-</div>
+<Sidebar.Provider>
+	<AppSidebar {userData} />
+	<Sidebar.Inset>
+		<header
+			class="group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear"
+		>
+			<div class="flex items-center gap-2 px-4">
+				<Sidebar.Trigger class="-ml-1" />
+				<Separator orientation="vertical" class="mr-2 data-[orientation=vertical]:h-4" />
+				<Breadcrumb.Root>
+					<Breadcrumb.List>
+						<Breadcrumb.Item class="hidden md:block">
+							<Breadcrumb.Link href="#">Building Your Application</Breadcrumb.Link>
+						</Breadcrumb.Item>
+						<Breadcrumb.Separator class="hidden md:block" />
+						<Breadcrumb.Item>
+							<Breadcrumb.Page>Data Fetching</Breadcrumb.Page>
+						</Breadcrumb.Item>
+					</Breadcrumb.List>
+				</Breadcrumb.Root>
+			</div>
+		</header>
+		<div class="flex flex-1 flex-col gap-4 p-4 pt-0">
+			<div class="grid auto-rows-min gap-4 md:grid-cols-3">
+				<div class="bg-muted/50 aspect-video rounded-xl"></div>
+				<div class="bg-muted/50 aspect-video rounded-xl"></div>
+				<div class="bg-muted/50 aspect-video rounded-xl"></div>
+			</div>
+			<div class="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min"></div>
+		</div>
+	</Sidebar.Inset>
+</Sidebar.Provider>
