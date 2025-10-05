@@ -3,19 +3,12 @@
 	import * as Breadcrumb from '$lib/components/ui/breadcrumb';
 	import { Separator } from '$lib/components/ui/separator';
 	import * as Sidebar from '$lib/components/ui/sidebar';
-
-    import type { PageData } from './$types';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 
-    const user = data.user;
-	const profile = data.profile;
-
-    const userData = {
-        nim: profile?.nim,
-        email: user?.email,
-        role: (profile?.roles as any)?.name
-    }
+    // Data is now coming from layout server load - cached and optimized
+    const userData = data.userData;
 </script>
 
 <Sidebar.Provider>
