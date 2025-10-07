@@ -1,128 +1,25 @@
 <script lang="ts" module>
-	import BookOpenIcon from '@lucide/svelte/icons/book-open';
-	import BotIcon from '@lucide/svelte/icons/bot';
-	import ChartPieIcon from '@lucide/svelte/icons/chart-pie';
-	import FrameIcon from '@lucide/svelte/icons/frame';
-	import MapIcon from '@lucide/svelte/icons/map';
-	import Settings2Icon from '@lucide/svelte/icons/settings-2';
-	import SquareTerminalIcon from '@lucide/svelte/icons/square-terminal';
-	// This is sample data.
+	import LayoutDashboardIcon from '@lucide/svelte/icons/layout-dashboard';
+	import BriefcaseBusinessIcon from '@lucide/svelte/icons/briefcase-business';
+	
 	const data = {
-		user: {
-			name: 'Rizki Nugraha',
-			email: 'm@example.com',
-			avatar: '/avatars/shadcn.jpg'
-		},
 		navMain: [
 			{
-				title: 'Playground',
-				url: '#',
-				icon: SquareTerminalIcon,
-				isActive: true,
-				items: [
-					{
-						title: 'History',
-						url: '#'
-					},
-					{
-						title: 'Starred',
-						url: '#'
-					},
-					{
-						title: 'Settings',
-						url: '#'
-					}
-				]
+				name: 'Dashboard',
+				url: '/dashboard',
+				icon: LayoutDashboardIcon
 			},
 			{
-				title: 'Models',
-				url: '#',
-				icon: BotIcon,
-				items: [
-					{
-						title: 'Genesis',
-						url: '#'
-					},
-					{
-						title: 'Explorer',
-						url: '#'
-					},
-					{
-						title: 'Quantum',
-						url: '#'
-					}
-				]
+				name: 'Praktikum',
+				url: '/dashboard/praktikum',
+				icon: BriefcaseBusinessIcon
 			},
-			{
-				title: 'Documentation',
-				url: '#',
-				icon: BookOpenIcon,
-				items: [
-					{
-						title: 'Introduction',
-						url: '#'
-					},
-					{
-						title: 'Get Started',
-						url: '#'
-					},
-					{
-						title: 'Tutorials',
-						url: '#'
-					},
-					{
-						title: 'Changelog',
-						url: '#'
-					}
-				]
-			},
-			{
-				title: 'Settings',
-				url: '#',
-				icon: Settings2Icon,
-				items: [
-					{
-						title: 'General',
-						url: '#'
-					},
-					{
-						title: 'Team',
-						url: '#'
-					},
-					{
-						title: 'Billing',
-						url: '#'
-					},
-					{
-						title: 'Limits',
-						url: '#'
-					}
-				]
-			}
-		],
-		projects: [
-			{
-				name: 'Design Engineering',
-				url: '#',
-				icon: FrameIcon
-			},
-			{
-				name: 'Sales & Marketing',
-				url: '#',
-				icon: ChartPieIcon
-			},
-			{
-				name: 'Travel',
-				url: '#',
-				icon: MapIcon
-			}
 		]
 	};
 </script>
 
 <script lang="ts">
 	import NavMain from './nav-main.svelte';
-	import NavProjects from './nav-projects.svelte';
 	import NavUser from './nav-user.svelte';
 	import * as Sidebar from '$lib/components/ui/sidebar';
 	import type { ComponentProps } from 'svelte';
@@ -155,8 +52,7 @@
 		</Sidebar.MenuButton>
 	</Sidebar.Header>
 	<Sidebar.Content>
-		<NavMain items={data.navMain} />
-		<NavProjects projects={data.projects} />
+		<NavMain navMain={data.navMain} />
 	</Sidebar.Content>
 	<Sidebar.Footer>
 		<NavUser user={userData} />

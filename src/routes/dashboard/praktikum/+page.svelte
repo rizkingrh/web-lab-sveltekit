@@ -1,11 +1,13 @@
 <script lang="ts">
 	import AppSidebar from '$lib/components/sidebar/app-sidebar.svelte';
+    import DataTable from "./data-table.svelte";
+    import { columns } from "./columns";
 	import * as Breadcrumb from '$lib/components/ui/breadcrumb';
 	import { Separator } from '$lib/components/ui/separator';
 	import * as Sidebar from '$lib/components/ui/sidebar';
 	import type { PageData } from './$types';
 
-	export let data: PageData;
+    let { data }: { data: PageData } = $props();
 
     // Data is now coming from layout server load - cached and optimized
     const userData = data.userData;
@@ -27,19 +29,22 @@
 						</Breadcrumb.Item>
 						<Breadcrumb.Separator class="hidden md:block" />
 						<Breadcrumb.Item>
-							<Breadcrumb.Page>Home</Breadcrumb.Page>
+							<Breadcrumb.Page>Praktikum</Breadcrumb.Page>
 						</Breadcrumb.Item>
 					</Breadcrumb.List>
 				</Breadcrumb.Root>
 			</div>
 		</header>
 		<div class="flex flex-1 flex-col gap-4 p-4 pt-0">
-			<div class="grid auto-rows-min gap-4 md:grid-cols-3">
-				<div class="bg-muted/50 aspect-video rounded-xl"></div>
-				<div class="bg-muted/50 aspect-video rounded-xl"></div>
-				<div class="bg-muted/50 aspect-video rounded-xl"></div>
+			<div class="flex flex-col gap-1">
+                <h2 class="text-2xl font-semibold tracking-tight">Daftar Praktikum</h2>
+                <p class="text-muted-foreground">
+                    Daftar Keseluruhan Praktikum Laboratorium Program Studi Teknik Elektro
+                </p>
 			</div>
-			<div class="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min"></div>
+			<div class="min-h-[100vh] flex-1 rounded-xl md:min-h-min">
+                <DataTable data={data.praktikum} {columns} />
+            </div>
 		</div>
 	</Sidebar.Inset>
 </Sidebar.Provider>
