@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { useSidebar } from '$lib/components/ui/sidebar';
 	import * as Sidebar from '$lib/components/ui/sidebar';
+	import { page } from '$app/stores';
+
 	let {
 		navMain
 	}: {
@@ -20,7 +22,7 @@
 	<Sidebar.Menu>
 		{#each navMain as item (item.name)}
 			<Sidebar.MenuItem>
-				<Sidebar.MenuButton>
+				<Sidebar.MenuButton isActive={$page.url.pathname === item.url }>
 					{#snippet child({ props })}
 						<a href={item.url} {...props}>
 							<item.icon />
